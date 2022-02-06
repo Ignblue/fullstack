@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 
 const App = () => {
-  const [ counter, setCounter ] = useState(41)
-
-  setTimeout(
-    () => setCounter(counter + 1),
-    1000
-  )
-console.log('rendering...', counter)
+  const [ counter, setCounter ] = useState(0)
+  
   return (
+    <div>
     <div>{counter}</div>
+    <button onClick={() => setCounter(counter + 1)}>
+        plus
+      </button>
+      <button onClick={() => setCounter(0)}> 
+        zero
+      </button>
+      </div>
   )
 }
 
