@@ -1,9 +1,10 @@
 import React from "react";
 
-const Nation= ({nation}) =>{
+const Nation = ({ nation }) =>
+{
     return (
         <div>
-        <h1>{nation.name}</h1>
+            <h1>{nation.name.official}</h1>
         </div>
     )
 }
