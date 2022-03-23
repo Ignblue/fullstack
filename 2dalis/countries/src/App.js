@@ -23,13 +23,18 @@ const showCountry=(event)=>{
   event.preventDefault();
   setSearchName(event.target.value)
 };
-const nationstoshow = countries.filter(nation => nation.name.toLowerCase().includes(searchName.toLowerCase()));
+const nationsToShow = countries.filter(nation=>{
+  const name=nation.name.official;
+  const name_low_case=name.toLowerCase();
+  const search_name_low_case=searchName.toLowerCase();
+  return name_low_case.includes(search_name_low_case)
+})
   return (
     <div>
       <div>
         find countries <input value={searchName} onChange={handleSearchChange}/>
       </div>
-      <Nations searchName={searchName} nationstoshow={nationstoshow} showCountry={showCountry}/>
+      <Nations searchName={searchName} nationstoshow={nationsToShow} showCountry={showCountry}/>
     </div>
   );
 }
