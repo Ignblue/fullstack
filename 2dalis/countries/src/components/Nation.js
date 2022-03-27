@@ -1,14 +1,11 @@
 import React from "react";
+import Weather from "./Weather";
 
-const Nation= ({ nation }) =>{
-  console.log("Nation:");
-  console.log(nation.languages);
-  console.log("entries", Object.entries(nation.languages));
-  console.log("keys", Object.keys(nation.languages));
-  console.log("values", Object.values(nation.languages));
+const Nation= ({ nation}) =>{
     return (
         <div>
-            <h1>{nation.name.official}</h1>
+            <h3>{nation.name.official} </h3>
+             { /*<button type="button" value={nation.name.official} onClick={showcountry} >show</button></h3>*/ }
             <div>capital {nation.capital}</div>
             <div>region {nation.region}</div>
             <h3>languages</h3>
@@ -18,6 +15,9 @@ const Nation= ({ nation }) =>{
         (language, i) => <li key={i}>{language}</li>
       )}
       </ul>
+      <div><img alt='nematau veliavos' src={nation.flags.png} height="100" width="150" /></div>
+     <h3>Weather in {nation.capital}</h3>
+      <Weather city={nation.capital} />
         </div>
     )
 }
