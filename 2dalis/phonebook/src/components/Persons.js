@@ -50,6 +50,9 @@ const Persons = ({ persons, setPersons, setConfirmMessage, searchName }) =>
                 const result = await personService.getAll();
                 setPersons(result)
                 setConfirmMessage(`deleted ${person.name}.`)
+                setTimeout(() => {
+          setConfirmMessage(null)
+        }, 5000)
             }
             catch (err)
             {
@@ -78,3 +81,4 @@ const Persons = ({ persons, setPersons, setConfirmMessage, searchName }) =>
 }
 
 export default Persons
+

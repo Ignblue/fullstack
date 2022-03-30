@@ -48,10 +48,14 @@ const App = () =>
         {
           setPersons(res)
           setConfirmMessage(`Added ${nameObject.name}.`)
+          setTimeout(() => {
+          setConfirmMessage(null)
+        }, 5000)
         })
         .catch(error =>
         {
           console.log('fail', error)
+          
         })
     }
     else
@@ -71,9 +75,13 @@ const App = () =>
           {
             setPersons(res)
             setConfirmMessage(`Updated ${nameObject.name}.`)
+            setTimeout(() => {
+          setConfirmMessage(null)
+        }, 5000)
           })
           .catch(error =>
           {
+          
             console.log('fail', error)
           })
       }
