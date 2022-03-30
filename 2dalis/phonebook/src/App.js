@@ -22,32 +22,9 @@ const App = () =>
       })
   }, [])
 
-  const personToShow = persons.filter(a => a.name.includes(searchName))
-
   const hadleSearchChange = (event) =>
   {
     setSearchName(event.target.value)
-  }
-
-  const handlePerson = (event) =>
-  {
-    event.preventDefault()
-
-    const id = event.target.value;
-    const person = persons.find((a) => a.id == id);
-
-    //delete
-
-    if (window.confirm(`Delete ${person.name}?`))
-    {
-      personService.remove(id)
-        .then(() => personService.getAll())
-        .then((res) =>
-        {
-          setPersons(res)
-          setConfirmMessage(`deleted ${person.name}.`)
-        })
-    }
   }
 
   const addName = (event) =>
@@ -118,15 +95,25 @@ const App = () =>
   return (
     <div>
       <h2>Phonebook</h2>
+      
       <Notification message={confirmMessage} />
       <Filter title='filter shown with'
         name={searchName} handleFunction={hadleSearchChange}
       />
+      
       <h2>Add a new</h2>
+     
       <PersonForm addName={addName} newName={newName}
         handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
+      
       <h2>Numbers</h2>
-      <Persons persontoshow={personToShow} deletePerson={handlePerson} />
+      
+      <Persons
+        persons={persons}
+        setPersons={setPersons}
+        setConfirmMessage={setConfirmMessage}
+        searchName={searchName} />
+        
     </div>
   )
 }
