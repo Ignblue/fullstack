@@ -37,9 +37,9 @@ const Persons = ({ persons, setPersons, setConfirmMessage, searchName }) =>
         event.preventDefault()
 
         const id = parseInt(event.target.value)
-
+    
         const person = persons.find((ele) => ele.id === id)
-
+        
         //delete
 
         if (window.confirm(`Delete ${person.name}?`))
