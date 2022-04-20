@@ -5,9 +5,10 @@ const app = express()
 const Person = require('./models/person')
 const cors = require('cors')
 
+app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
-app.use(cors())
+
 
 
 morgan.token('person', (request, response) => JSON.stringify(request.body));
@@ -103,23 +104,26 @@ app.post('/api/persons', (request, response, next) => {
   }
   
   //The name already exists in the phonebook
-  const result1 = persons.find((ele) => ele.name === body.name)
+  //const result1 = persons.find((ele) => ele.name === body.name)
 
-  if (result1 !== undefined)
-  {
-    return response.status(400).json({
-      error: 'name already existing'
-    })
-  }
+  //if (result1 !== undefined)
+  //{
+   // return response.status(400).json({
+      //error: 'name already existing'
+    //})
+ // }
  
   const person = new Person ({
     name: body.name,
     number: body.number
   })
-
-  persons = persons.concat(person)
-
-  response.json(person)
+  
+ person
+    .save()
+    .then((savedPerson) => {
+      response.json(savedPerson.toJSON())
+    })
+    .catch((error) => next(error))
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
