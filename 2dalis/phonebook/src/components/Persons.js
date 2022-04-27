@@ -10,7 +10,7 @@ const Persons = ({ persons, setPersons, setConfirmMessage, searchName }) =>
     {
         event.preventDefault()
 
-        const id = parseInt(event.target.value)
+        const id = event.target.value
 
         const person = persons.find((ele) => ele.id === id)
 
@@ -36,7 +36,7 @@ const Persons = ({ persons, setPersons, setConfirmMessage, searchName }) =>
     {
         event.preventDefault()
 
-        const id = parseInt(event.target.value)
+        const id = event.target.value
     
         const person = persons.find((ele) => ele.id === id)
         
@@ -81,4 +81,3 @@ const Persons = ({ persons, setPersons, setConfirmMessage, searchName }) =>
 }
 
 export default Persons
-
