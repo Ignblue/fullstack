@@ -6,21 +6,53 @@ const Persons = ({ persons, setPersons, setConfirmMessage, searchName }) =>
     //
     //handleDelete
     //
-
-    const handleDelete = async (person) =>
+    const handleDelete = (event) =>
     {
+        event.preventDefault()
+
+        const id = event.target.value
+
+        const person = persons.find((ele) => ele.id === id)
+
+        //delete
+
+        if (window.confirm(`Delete ${person.name}?`))
+        {
+            personService.remove(id)
+                .then(() => personService.getAll())
+                .then((res) =>
+                {
+                    setPersons(res)
+                    setConfirmMessage(`deleted ${person.name}.`)
+                })
+        }
+    }
+
+    //
+    // handleDelete2 (a beter way to handle promises (async/await))
+    //
+
+    const handleDelete2 = async (event) =>
+    {
+        event.preventDefault()
+
+        const id = event.target.value
+    
+        const person = persons.find((ele) => ele.id === id)
+        
+        //delete
+
         if (window.confirm(`Delete ${person.name}?`))
         {
             try
             {
-                await personService.remove(person.id)
+                await personService.remove(id)
                 const result = await personService.getAll();
                 setPersons(result)
                 setConfirmMessage(`deleted ${person.name}.`)
-                setTimeout(() =>
-                {
-                    setConfirmMessage(null)
-                }, 5000)
+                setTimeout(() => {
+          setConfirmMessage(null)
+        }, 5000)
             }
             catch (err)
             {
@@ -29,7 +61,6 @@ const Persons = ({ persons, setPersons, setConfirmMessage, searchName }) =>
         }
     }
 
-    //filter by searchName
     const personToShow = persons.filter(ele => ele.name.includes(searchName))
 
     return (
@@ -40,7 +71,7 @@ const Persons = ({ persons, setPersons, setConfirmMessage, searchName }) =>
                     return (
                         <div key={i}>
                             <p>{ele.name} {ele.number}</p>
-                            <button onClick={function () { handleDelete(ele) }}>delete</button>
+                            <button value={ele.id} onClick={handleDelete2}>delete</button>
                         </div>
                     )
                 })
@@ -50,4 +81,3 @@ const Persons = ({ persons, setPersons, setConfirmMessage, searchName }) =>
 }
 
 export default Persons
-
