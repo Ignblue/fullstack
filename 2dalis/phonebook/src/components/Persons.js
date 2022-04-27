@@ -13,7 +13,7 @@ const Persons = ({ persons, setPersons, setConfirmMessage, searchName }) =>
         {
             try
             {
-                await personService.remove(id)
+                await personService.remove(person.id)
                 const result = await personService.getAll();
                 setPersons(result)
                 setConfirmMessage(`deleted ${person.name}.`)
